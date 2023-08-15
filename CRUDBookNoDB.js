@@ -39,7 +39,7 @@ app.post("/books", (req, res) => {
         author: req.body.author,
     };
     books.push(book);
-    res.json(book);
+    res.send(book);
 });
 
 app.put("/books/:id", (req, res) => {
