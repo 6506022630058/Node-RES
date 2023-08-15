@@ -6,7 +6,9 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 
+
 app.use(express.json());
+
 
 let books = [
     {
@@ -25,6 +27,7 @@ let books = [
         author: "Author 3",
     },
 ];
+
 
 app.get("/books", (req, res) => {
     res.json(books);
