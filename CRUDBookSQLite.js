@@ -64,6 +64,24 @@ app.post('/books', (req, res) => {
 app.put('/books/:id', (req, res) => {
     const book = req.body;
     db.run('UPDATE books SET title = ?, author = ? WHERE id = ?', book.title, book.author, req.params.id, function(err) {
-    
+        if(err){
+            res.status(500).send(err);
+        }else{
+            res.send(book);
+        }
     });
 });
+
+
+app.delete('/books/:id', (req, res) => {
+    db.run('DELETE FROM books WHERE id = ?', req.params.id, function(err) {
+        if(err){
+            res.status(500).send(err);
+        }else{
+            res.send({});
+        }
+    });
+});
+
+const post = process.env.PORT || 3000;
+app.listen(port, () => console.log(`Listening on port ${port}...`));
