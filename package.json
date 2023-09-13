@@ -1,0 +1,33 @@
+{
+  "name": "nde-res",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "format": "prettier --write #.js",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/6506022630058/Node-RES"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/6506022630058/Node-RES/issues"
+  },
+  "homepage": "https://github.com/6506022630058/Node-RES#readme",
+  "devDependencies": {
+    "nodemon": "^3.0.1",
+    "prettier": "^3.0.1"
+  },
+  "dependencies": {
+    "3": "^2.1.0",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "sqlite": "5.0.1",
+    "sqlite3": "5.0.2"
+  },
+  "description": ""
+}
