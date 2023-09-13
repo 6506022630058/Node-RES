@@ -1,5 +1,5 @@
 {
-  "name": "nde-res",
+  "name": "res",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/6506022630058/Node-RES"
+    "url": "git+https://github.com/6506022630058/Node-RES.git"
   },
   "keywords": [],
   "author": "",
@@ -28,7 +28,7 @@
     "express": "^4.18.2",
     "sequelize": "^6.33.0",
     "sqlite": "5.0.1",
-    "sqlite3": "^5.1.6"
+    "sqlite3": "5.0.2"
   },
   "description": ""
 }
