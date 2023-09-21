@@ -8,7 +8,7 @@ app.use(express.json());
 
 db.run(`CREATE TABLE IF NOT EXISTS books (
     id INTEGER PRIMARY KEY,
-    title NEXT,
+    title TEXT,
     author TEXT
 )`);
 
