@@ -151,7 +151,7 @@ app.get('/std_crss', (req, res) => {
 });
 
 app.get('/std_crss/:id', (req, res) => {
-    db3.get('SELECT * FROM std_crss WHERE id = ?', req.params.id, (err, row) => {
+    db3.get('SELECT std_id, crs_id FROM std_crss WHERE id = ?', req.params.id, (err, row) => {
         if (err) {
             res.status(500).send(err);
         } else {
