@@ -166,7 +166,7 @@ app.get('/std_crss/:id', (req, res) => {
 
 app.post('/std_crss', (req, res) => {
     const std_crs = req.body;
-    db3.run('INSERT INTO std_crss (std_id, crs_id) VALUES (?, ?)', std_crs.std_id, std_crs.crs.id , function(err) {
+    db3.run('INSERT INTO std_crss (std_id, crs_id) VALUES (?, ?)', std_crs.std_id, std_crs.crs_id , function(err) {
         if (err) {
             res.status(500).send(err);
         } else {
