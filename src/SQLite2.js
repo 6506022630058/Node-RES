@@ -3,14 +3,14 @@ const sqlite3 = require('sqlite3');
 const app = express();
 app.use(express.json());
 
-const db1 = new sqlite3.Database('./Database/std_db.sqlite');
-db1.run(`CREATE TABLE IF NOT EXISTS students (
+const db1 = new sqlite3.Database('./Database/rooms.sqlite');
+db1.run(`CREATE TABLE IF NOT EXISTS rooms (
     id INTEGER PRIMARY KEY,
     name TEXT
 )`);
 
-app.get('/students', (req, res) => {
-    db1.all('SELECT * FROM students', (err, rows) => {
+app.get('/rooms', (req, res) => {
+    db1.all('SELECT * FROM rooms', (err, rows) => {
         if (err) {
             res.status(500).send(err);
         }   else {
@@ -19,13 +19,13 @@ app.get('/students', (req, res) => {
     });
 });
 
-app.get('/students/:id', (req, res) => {
-    db1.get('SELECT * FROM students WHERE id = ?', req.params.id, (err, row) => {
+app.get('/rooms/:id', (req, res) => {
+    db1.get('SELECT * FROM rooms WHERE id = ?', req.params.id, (err, row) => {
         if (err) {
             res.status(500).send(err);
         } else {
             if (!row) {
-                res.status(404).send('Student not found');
+                res.status(404).send('Room not found');
             } else {
                 res.json(row);
             }
@@ -33,31 +33,31 @@ app.get('/students/:id', (req, res) => {
     });
 });
 
-app.post('/students', (req, res) => {
-    const student = req.body;
-    db1.run('INSERT INTO students (name) VALUES (?)', student.name, function(err) {
+app.post('/rooms', (req, res) => {
+    const room = req.body;
+    db1.run('INSERT INTO rooms (name) VALUES (?)', room.name, function(err) {
         if (err) {
             res.status(500).send(err);
         } else {
-            student.id = this.lastID;
-            res.send(student);
+            room.id = this.lastID;
+            res.send(room);
         }
     });
 });
 
-app.put('/students/:id', (req, res) => {
-    const student = req.body;
-    db1.run('UPDATE students SET name = ? WHERE id = ?', student.name, req.params.id, function(err) {
+app.put('/rooms/:id', (req, res) => {
+    const room = req.body;
+    db1.run('UPDATE rooms SET name = ? WHERE id = ?', room.name, req.params.id, function(err) {
         if (err) {
             res.status(500).send(err);
         } else {
-            res.send(student);
+            res.send(room);
         }
     });
 });
 
-app.delete('/students/:id', (req, res) => {
-    db1.run('DELETE FROM students WHERE id = ?', req.params.id, function(err) {
+app.delete('/rooms/:id', (req, res) => {
+    db1.run('DELETE FROM rooms WHERE id = ?', req.params.id, function(err) {
         if (err) {
             res.status(500).send(err);
         } else {
@@ -68,14 +68,14 @@ app.delete('/students/:id', (req, res) => {
 
 //<!-----------------------------------------------------!>//
 
-const db2 = new sqlite3.Database('./Database/crs_db.sqlite');
-db2.run(`CREATE TABLE IF NOT EXISTS courses (
+const db2 = new sqlite3.Database('./Database/people.sqlite');
+db2.run(`CREATE TABLE IF NOT EXISTS people (
     id INTEGER PRIMARY KEY,
     name TEXT
 )`);
 
-app.get('/courses', (req, res) => {
-    db2.all('SELECT * FROM courses', (err, rows) => {
+app.get('/people', (req, res) => {
+    db2.all('SELECT * FROM people', (err, rows) => {
         if (err) {
             res.status(500).send(err);
         }   else {
@@ -84,13 +84,13 @@ app.get('/courses', (req, res) => {
     });
 });
 
-app.get('/courses/:id', (req, res) => {
-    db2.get('SELECT * FROM courses WHERE id = ?', req.params.id, (err, row) => {
+app.get('/people/:id', (req, res) => {
+    db2.get('SELECT * FROM people WHERE id = ?', req.params.id, (err, row) => {
         if (err) {
             res.status(500).send(err);
         } else {
             if (!row) {
-                res.status(404).send('Course not found');
+                res.status(404).send('Person not found');
             } else {
                 res.json(row);
             }
@@ -98,31 +98,31 @@ app.get('/courses/:id', (req, res) => {
     });
 });
 
-app.post('/courses', (req, res) => {
-    const course = req.body;
-    db2.run('INSERT INTO courses (name) VALUES (?)', course.name, function(err) {
+app.post('/people', (req, res) => {
+    const person = req.body;
+    db2.run('INSERT INTO people (name) VALUES (?)', person.name, function(err) {
         if (err) {
             res.status(500).send(err);
         } else {
-            course.id = this.lastID;
-            res.send(course);
+            person.id = this.lastID;
+            res.send(person);
         }
     });
 });
 
-app.put('/courses/:id', (req, res) => {
-    const course = req.body;
-    db2.run('UPDATE courses SET name = ? WHERE id = ?', course.name, req.params.id, function(err) {
+app.put('/people/:id', (req, res) => {
+    const person = req.body;
+    db2.run('UPDATE people SET name = ? WHERE id = ?', person.name, req.params.id, function(err) {
         if (err) {
             res.status(500).send(err);
         } else {
-            res.send(course);
+            res.send(person);
         }
     });
 });
 
-app.delete('/courses/:id', (req, res) => {
-    db2.run('DELETE FROM courses WHERE id = ?', req.params.id, function(err) {
+app.delete('/people/:id', (req, res) => {
+    db2.run('DELETE FROM people WHERE id = ?', req.params.id, function(err) {
         if (err) {
             res.status(500).send(err);
         } else {
@@ -133,15 +133,15 @@ app.delete('/courses/:id', (req, res) => {
 
 //<!-----------------------------------------------------!>//
 
-const db3 = new sqlite3.Database('./Database/stdcrs_db.sqlite');
-db3.run(`CREATE TABLE IF NOT EXISTS std_crss (
+const db3 = new sqlite3.Database('./Database/renting.sqlite');
+db3.run(`CREATE TABLE IF NOT EXISTS renting (
     id INTEGER PRIMARY KEY,
-    std_id INTEGER,
-    crs_id INTEGER
+    r_id INTEGER,
+    p_id INTEGER
 )`);
 
-app.get('/std_crss', (req, res) => {
-    db3.all('SELECT std_id, crs_id FROM std_crss', (err, rows) => {
+app.get('/renting', (req, res) => {
+    db3.all('SELECT r_id, p_id FROM renting', (err, rows) => {
         if (err) {
             res.status(500).send(err);
         }   else {
@@ -150,13 +150,13 @@ app.get('/std_crss', (req, res) => {
     });
 });
 
-app.get('/std_crss/:id', (req, res) => {
-    db3.get('SELECT std_id, crs_id FROM std_crss WHERE id = ?', req.params.id, (err, row) => {
+app.get('/renting/:id', (req, res) => {
+    db3.get('SELECT r_id, p_id FROM renting WHERE id = ?', req.params.id, (err, row) => {
         if (err) {
             res.status(500).send(err);
         } else {
             if (!row) {
-                res.status(404).send('Student-Course not found');
+                res.status(404).send('Rent not found');
             } else {
                 res.json(row);
             }
@@ -164,31 +164,31 @@ app.get('/std_crss/:id', (req, res) => {
     });
 });
 
-app.post('/std_crss', (req, res) => {
-    const std_crs = req.body;
-    db3.run('INSERT INTO std_crss (std_id, crs_id) VALUES (?, ?)', std_crs.std_id, std_crs.crs_id , function(err) {
+app.post('/renting', (req, res) => {
+    const rent = req.body;
+    db3.run('INSERT INTO renting (r_id, p_id) VALUES (?, ?)', rent.r_id, rent.p_id , function(err) {
         if (err) {
             res.status(500).send(err);
         } else {
-            std_crs.id = this.lastID;
-            res.send(std_crs);
+            rent.id = this.lastID;
+            res.send(rent);
         }
     });
 });
 
-app.put('/std_crss/:id', (req, res) => {
-    const std_crs = req.body;
-    db3.run('UPDATE std_crss SET std_id = ?, crs_id = ?  WHERE id = ?', std_crs.std_id, std_crs.crs_id , req.params.id, function(err) {
+app.put('/renting/:id', (req, res) => {
+    const rent = req.body;
+    db3.run('UPDATE renting SET r_id = ?, p_id = ?  WHERE id = ?', rent.r_id, rent.p_id , req.params.id, function(err) {
         if (err) {
             res.status(500).send(err);
         } else {
-            res.send(std_crs);
+            res.send(rent);
         }
     });
 });
 
-app.delete('/std_crss/:id', (req, res) => {
-    db3.run('DELETE FROM std_crss WHERE id = ?', req.params.id, function(err) {
+app.delete('/renting/:id', (req, res) => {
+    db3.run('DELETE FROM renting WHERE id = ?', req.params.id, function(err) {
         if (err) {
             res.status(500).send(err);
         } else {
