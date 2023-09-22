@@ -197,5 +197,17 @@ app.delete('/std_crss/:id', (req, res) => {
     });
 });
 
+//<!-----------------------------------------------------!>//
+
+app.get('/summary', (req, res) => {
+    db1.all('SELECT students.name, courses.name FROM students JOIN std_crss ON students.id = std_crss.std_id JOIN courses ON courses.id = std_crss.crs_id; ', (err, rows) => {
+        if (err) {
+            res.status(500).send(err);
+        }   else {
+            res.json(rows);
+        }
+    });
+});
+
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Listening of port ${port}...`));
