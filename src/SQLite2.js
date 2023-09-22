@@ -141,7 +141,7 @@ db3.run(`CREATE TABLE IF NOT EXISTS renting (
 )`);
 
 app.get('/renting', (req, res) => {
-    db3.all('SELECT r_id, p_id FROM renting', (err, rows) => {
+    db3.all('SELECT * FROM renting', (err, rows) => {
         if (err) {
             res.status(500).send(err);
         }   else {
