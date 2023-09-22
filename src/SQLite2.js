@@ -199,15 +199,5 @@ app.delete('/std_crss/:id', (req, res) => {
 
 //<!-----------------------------------------------------!>//
 
-// app.get('/summary', (req, res) => {
-//     db1.all('SELECT * FROM courses', (err, rows) => {
-//         if (err) {
-//             res.status(500).send(err);
-//         }   else {
-//             res.json(rows);
-//         }
-//     });
-// });
-
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Listening of port ${port}...`));
