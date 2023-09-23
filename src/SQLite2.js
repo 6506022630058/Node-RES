@@ -151,7 +151,7 @@ app.get('/renting', (req, res) => {
 });
 
 app.get('/renting/:id', (req, res) => {
-    db3.get('SELECT r_id, p_id FROM renting WHERE id = ?', req.params.id, (err, row) => {
+    db3.get('SELECT * FROM renting WHERE id = ?', req.params.id, (err, row) => {
         if (err) {
             res.status(500).send(err);
         } else {
