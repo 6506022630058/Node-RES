@@ -197,21 +197,6 @@ app.delete('/hopak/renting/:id', (req, res) => {
 
 //<!-----------------------------------------------------!>//
 
-// app.get('/hopak/summary', (req, res) => {
-//     db.all(`
-//         SELECT renting.id AS renting_id, rooms.id AS room_id, rooms.name AS room_name, people.id AS person_id, people.name AS person_name
-//         FROM renting
-//         INNER JOIN rooms ON renting.r_id = rooms.id
-//         INNER JOIN people ON renting.p_id = people.id
-//     `, (err, rows) => {
-//         if (err) {
-//             res.status(500).send(err);
-//         } else {
-//             res.json(rows);
-//         }
-//     });
-// });
-
 app.get('/hopak/summary', (req, res) => {
     db.all(`
         SELECT rooms.id AS room_id, rooms.name AS room_name, GROUP_CONCAT(people.name) AS people
