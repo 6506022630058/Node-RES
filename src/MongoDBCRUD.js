@@ -1,9 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-
+//https://node50132-jsapp.proen.app.ruk-com.cloud/
 mongoose.connect(
-    'mongodb://localhost:27017/Books', 
+    'mongodb://https://node50132-jsapp.proen.app.ruk-com.cloud:27017/Books', 
     { 
         useNewUrlParser: true, 
         useUnifiedTopology: true 
