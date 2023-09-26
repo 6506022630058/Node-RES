@@ -11,7 +11,7 @@ const dbUrl = 'postgres://webadmin:ENVtrb97913@node50139-jsapp.proen.app.ruk-com
 const sequelize = new Sequelize(dbUrl);
 
 
-const Books = sequelize.define('book', {
+const Book = sequelize.define('book', {
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
