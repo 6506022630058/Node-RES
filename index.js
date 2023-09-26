@@ -3,8 +3,8 @@ const Sequelize = require('sequelize');
 const app = express();
 
 app.use(express.json());
-
-
+                                                                                                      //Create Endpoint
+            //'postgres://(username):(password)@node(portnumberofSQLDB)-jsapp.proen.app.ruk-com.cloud:(PrivatePort)/(NameofTable)'
 const dbUrl = 'postgres://webadmin:ENVtrb97913@node50139-jsapp.proen.app.ruk-com.cloud:5432/Books';
 
 
